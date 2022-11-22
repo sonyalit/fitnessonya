@@ -1,0 +1,62 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  max-width:500px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+  margin-left:auto;
+  margin-right: auto;
+  opacity: 0.9;
+
+}
+body{
+  background-image: url('https://outdoor-gym.com/wp-content/uploads/%20Outdoor%20fitness%20equipment%20for%20cities%20and%20municipalities%20-1.jpg');
+}
+p{
+  font-size: 16px;
+  font-weight: bolder;
+}
+input{
+  font-size: 14px;
+  width: 250px;
+}
+select{
+  font-size: 14px;
+}
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+.bmi,.idealweight,.dailycalorie,.macros,.bodyfat{
+display: none;
+}
+.first{
+  height: 100vh;
+}
