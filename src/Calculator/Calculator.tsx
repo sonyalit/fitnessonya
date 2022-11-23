@@ -40,20 +40,30 @@ function Calculator({bodyInfo,setBodyInfo}:PropsType):JSX.Element{
         lowcarbs: {protein: number, fat: number, carbs: number},
         lowfat: {protein: number, fat: number, carbs: number},
       }
+      interface Ioptions{
+        method:string,
+        headers:{
+          'X-RapidAPI-Key':string,
+          'X-RapidAPI-Host': string,
+        }
+      }
+      
       const[bmi, setBMI] = useState<IBMI>()
       const[bodyFatStat, setBodyFatStat] = useState<IBodyFat>()
       const [idealWeightResult, setIdealWeightResult] = useState<IIdealWeight>()
       const[calories, setCalories] = useState<ICalorie>()
       const [macrosResult, setMacrosResult] = useState<IMacros>()
       function BMI(){
-          const options = {
+       
+        const key =  process.env.REACT_APP_KEY
+        if(key){
+          const options:Ioptions = {
             method: 'GET',
             headers: {
-              'X-RapidAPI-Key': '07048a504fmshab2493f822fe626p150370jsn2af1182eba72',
+              'X-RapidAPI-Key':key,
               'X-RapidAPI-Host': 'fitness-calculator.p.rapidapi.com'
             }
           };
-          
           fetch(`https://fitness-calculator.p.rapidapi.com/bmi?age=${bodyInfo?.age}&weight=${bodyInfo?.weight}&height=${bodyInfo?.height}`, options)
             .then(response => response.json())
             .then(response => setBMI({bmi:response.data.bmi, health:response.data.health, healthy_bmi_range:response.data.healthy_bmi_range}))
@@ -62,14 +72,17 @@ function Calculator({bodyInfo,setBodyInfo}:PropsType):JSX.Element{
             document.querySelector<HTMLElement>('.bmi')!.style.display="block"
       
       }
+    }
       function bodyFat(){
-        const options = {
-          method: 'GET',
-          headers: {
-            'X-RapidAPI-Key': '07048a504fmshab2493f822fe626p150370jsn2af1182eba72',
-            'X-RapidAPI-Host': 'fitness-calculator.p.rapidapi.com'
-          }
-        };
+        const key =  process.env.REACT_APP_KEY
+        if(key){
+          const options:Ioptions = {
+            method: 'GET',
+            headers: {
+              'X-RapidAPI-Key':key,
+              'X-RapidAPI-Host': 'fitness-calculator.p.rapidapi.com'
+            }
+          };
         
         fetch(`https://fitness-calculator.p.rapidapi.com/bodyfat?age=${bodyInfo?.age}&gender=${bodyInfo?.gender}&weight=${bodyInfo?.weight}&height=${bodyInfo?.height}&neck=${bodyInfo?.neck}&waist=${bodyInfo?.waist}&hip=${bodyInfo?.hip}`, options)
           .then(response => response.json())
@@ -79,14 +92,17 @@ function Calculator({bodyInfo,setBodyInfo}:PropsType):JSX.Element{
           document.querySelector<HTMLElement>('.bodyfat')!.style.display="block"
       
       }
+    }
       function idealWeight(){
-        const options = {
-          method: 'GET',
-          headers: {
-            'X-RapidAPI-Key': '07048a504fmshab2493f822fe626p150370jsn2af1182eba72',
-            'X-RapidAPI-Host': 'fitness-calculator.p.rapidapi.com'
-          }
-        };
+        const key =  process.env.REACT_APP_KEY
+        if(key){
+          const options:Ioptions = {
+            method: 'GET',
+            headers: {
+              'X-RapidAPI-Key':key,
+              'X-RapidAPI-Host': 'fitness-calculator.p.rapidapi.com'
+            }
+          };
         
         fetch(`https://fitness-calculator.p.rapidapi.com/idealweight?gender=${bodyInfo?.gender}&height=${bodyInfo?.height}`, options)
           .then(response => response.json())
@@ -96,15 +112,17 @@ function Calculator({bodyInfo,setBodyInfo}:PropsType):JSX.Element{
           document.querySelector<HTMLElement>('.idealweight')!.style.display="block"
       
       }
+    }
       function dailyCalory(){
-        const options = {
-          method: 'GET',
-          headers: {
-            'X-RapidAPI-Key': '07048a504fmshab2493f822fe626p150370jsn2af1182eba72',
-            'X-RapidAPI-Host': 'fitness-calculator.p.rapidapi.com'
-          }
-        };
-      
+        const key =  process.env.REACT_APP_KEY
+        if(key){
+          const options:Ioptions = {
+            method: 'GET',
+            headers: {
+              'X-RapidAPI-Key':key,
+              'X-RapidAPI-Host': 'fitness-calculator.p.rapidapi.com'
+            }
+          };
         fetch(`https://fitness-calculator.p.rapidapi.com/dailycalorie?age=${bodyInfo?.age}&gender=${bodyInfo?.gender}&height=${bodyInfo?.height}&weight=${bodyInfo?.weight}&activitylevel=level_${bodyInfo?.activity}`, options)
           .then(response => response.json())
           //.then(response=>console.log(response))
@@ -121,16 +139,18 @@ function Calculator({bodyInfo,setBodyInfo}:PropsType):JSX.Element{
           .catch(err => console.error('error:' + err)); 
           document.querySelectorAll<HTMLElement>('.result')!.forEach(el=>el.style.display="none")
           document.querySelector<HTMLElement>('.dailycalorie')!.style.display="block"
-      
+        }
       }
       function macros(){
-        const options = {
-          method: 'GET',
-          headers: {
-            'X-RapidAPI-Key': '07048a504fmshab2493f822fe626p150370jsn2af1182eba72',
-            'X-RapidAPI-Host': 'fitness-calculator.p.rapidapi.com'
-          }
-        };
+        const key =  process.env.REACT_APP_KEY
+        if(key){
+          const options:Ioptions = {
+            method: 'GET',
+            headers: {
+              'X-RapidAPI-Key':key,
+              'X-RapidAPI-Host': 'fitness-calculator.p.rapidapi.com'
+            }
+          };
         
         fetch(`https://fitness-calculator.p.rapidapi.com/macrocalculator?age=${bodyInfo?.age}&gender=${bodyInfo?.gender}&height=${bodyInfo?.height}&weight=${bodyInfo?.weight}&activitylevel=${bodyInfo?.activity}&goal=${bodyInfo?.goal}`, options)
           .then(response => response.json())
@@ -144,7 +164,7 @@ function Calculator({bodyInfo,setBodyInfo}:PropsType):JSX.Element{
           .catch(err => console.error('error:' + err)); 
           document.querySelectorAll<HTMLElement>('.result')!.forEach(el=>el.style.display="none")
           document.querySelector<HTMLElement>('.macros')!.style.display="block"
-      
+        }
       }
     return (
         <div className='second'>
